@@ -1,7 +1,4 @@
-HEAD
-name: Deploy to Server
 name: Deploy Static Site to GitHub Pages
-48bb00b783ecae2098380f7275d61a7503a2df64
 
 # Trigger the workflow on push to the main branch
 on:
@@ -10,31 +7,6 @@ on:
       - main
 
 jobs:
-<<<<<<< HEAD
-  deploy:
-    runs-on: ubuntu-latest
-
-    steps:
-    # Checkout the repository
-    - name: Checkout Code
-      uses: actions/checkout@v3
-
-    # Set up SSH agent to connect to the server
-    - name: Set up SSH
-      uses: webfactory/ssh-agent@v0.8.1
-      with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}  # Add your private key to GitHub Secrets
-
-    # Deploy the code to the server via SSH
-    - name: Deploy to Server
-      run: |
-        ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
-          cd /path/to/your/app           # Change this to the directory on the server
-          git pull origin main           # Pull the latest changes
-          ./deploy.sh                    # Run your deployment script if you have one
-        EOF
-
-=======
   build-and-deploy:
     runs-on: ubuntu-latest
 
@@ -61,4 +33,3 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}  # GitHub automatically creates this token
         publish_dir: ./public                      # Directory with the generated static site files
->>>>>>> 48bb00b783ecae2098380f7275d61a7503a2df64
