@@ -1,4 +1,7 @@
+HEAD
 name: Deploy to Server
+name: Deploy Static Site to GitHub Pages
+48bb00b783ecae2098380f7275d61a7503a2df64
 
 # Trigger the workflow on push to the main branch
 on:
@@ -7,6 +10,7 @@ on:
       - main
 
 jobs:
+<<<<<<< HEAD
   deploy:
     runs-on: ubuntu-latest
 
@@ -30,3 +34,31 @@ jobs:
           ./deploy.sh                    # Run your deployment script if you have one
         EOF
 
+=======
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Check out the code
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Step 2: Set up Node.js (if you're using a static site generator like Jekyll, Hugo, or a custom build process)
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'  # Adjust based on your environment needs
+
+    # Step 3: Install dependencies (if applicable) and build the site
+    - name: Install dependencies and build site
+      run: |
+        npm install          # Optional, depending on your project setup
+        npm run build        # Build command, adjust to your generator (for example, for Jekyll use `jekyll build`)
+
+    # Step 4: Deploy to GitHub Pages
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}  # GitHub automatically creates this token
+        publish_dir: ./public                      # Directory with the generated static site files
+>>>>>>> 48bb00b783ecae2098380f7275d61a7503a2df64
